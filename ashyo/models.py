@@ -35,7 +35,7 @@ class Category(BaseModel):
 
 class Characteristics(BaseModel):
     model = models.CharField(max_length=50)
-    brand = models.CharField(max_length=50)  # Changed from brend to brand
+    brand = models.CharField(max_length=50)  
     size = models.CharField(max_length=50, null=True, blank=True)
     accumulator = models.CharField(max_length=50, null=True, blank=True)
     ram = models.CharField(max_length=50, null=True, blank=True)
@@ -50,7 +50,7 @@ class Characteristics(BaseModel):
 
 class Product(BaseModel):
     name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=10, decimal_places=2)  # Added max_digits
+    price = models.DecimalField(max_digits=10, decimal_places=2)  
     img = models.ImageField(upload_to="images")
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
@@ -60,7 +60,7 @@ class Product(BaseModel):
         return self.name
 
 
-class Brand(BaseModel):  # Changed from Brend to Brand
+class Brand(BaseModel):  
     name = models.CharField(max_length=50)
     add_price = models.DecimalField(max_digits=10, decimal_places=2)
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='brands')
@@ -101,7 +101,7 @@ class AboutAshyo(BaseModel):
 
 
 class Comment(BaseModel):
-    text = models.TextField()  # Changed from comment to text to avoid clash
+    text = models.TextField()  
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='comments')
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name='comments')
     rate = models.PositiveIntegerField()
@@ -115,14 +115,14 @@ class ProductInCart(BaseModel):
     product_color = models.ForeignKey(ProductImages, on_delete=models.CASCADE, related_name='cart_items')
     product_size = models.ForeignKey(ProductMemory, on_delete=models.CASCADE, related_name='cart_items')
     quantity = models.PositiveIntegerField()
-    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='cart_items')  # Removed 'shop.' prefix
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='cart_items')  
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"{self.product.name} in cart"
 
 
-class Order(BaseModel):  # Added a basic Order model to avoid lazy reference issue
+class Order(BaseModel):  
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name='orders')
     created_at = models.DateTimeField(auto_now_add=True)
 
