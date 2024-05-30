@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Kategoriya, Mahsulot, FoydalanuvchiMalumot, Buyurtma, BuyurtmaItem, YetkazibBerishManzil, YagonaSahifa
+from .models import Client, Category, Characteristics, Product, Brand, ProductMemory, ProductImages, AboutAshyo, Comment, ProductInCart, Order
 import django_filters
 
-class KategotiyaSerializer(serializers.ModelSerializer):
+class ClientSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Kategoriya
+        model = Client
         fields = "__all__"

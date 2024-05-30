@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import KategoriyaListAPIView
+from .views import ClientListAPIView
 
 
 
 urlpatterns = [
-    path('kategoriya-list/', KategoriyaListAPIView.as_view()),
+    path('client-list/', ClientListAPIView.as_view()),
       
 ]
 
