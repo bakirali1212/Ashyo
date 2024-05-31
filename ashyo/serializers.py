@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Client, Category, Characteristics, Product, Brand, ProductMemory, ProductImages, AboutAshyo, Comment, ProductInCart, Order
+from .models import Client, Category, Product, Brand, ProductMemory, ProductImages, AboutAshyo, Comment, ProductInCart, Order
 import django_filters
 
 
@@ -24,10 +24,7 @@ class BrandListSerializer(serializers.ModelSerializer):
         model = Brand
         fields = "__all__"
 
-class CharacteristicsListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Characteristics
-        fields = "__all__"
+
 
 class ProductMemoryListSerializer(serializers.ModelSerializer):
     class Meta:

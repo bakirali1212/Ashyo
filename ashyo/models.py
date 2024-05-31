@@ -33,19 +33,7 @@ class Category(BaseModel):
         return self.name
 
 
-class Characteristics(BaseModel):
-    model = models.CharField(max_length=50)
-    brand = models.CharField(max_length=50)  
-    size = models.CharField(max_length=50, null=True, blank=True)
-    accumulator = models.CharField(max_length=50, null=True, blank=True)
-    ram = models.CharField(max_length=50, null=True, blank=True)
-    rom = models.CharField(max_length=50, null=True, blank=True)
-    processor = models.CharField(max_length=50, null=True, blank=True)
-    simcard = models.CharField(max_length=50, null=True, blank=True)
-    core = models.CharField(max_length=50, null=True, blank=True)
 
-    def __str__(self):
-        return self.model
 
 
 class Product(BaseModel):
@@ -54,11 +42,19 @@ class Product(BaseModel):
     img = models.ImageField(upload_to="images")
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
-    characteristics = models.ForeignKey(Characteristics, on_delete=models.PROTECT, related_name='products')
 
     def __str__(self):
         return self.name
 
+class ProductInfoType(models.Model):
+    name = models.CharField(max_length=100)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+
+
+class ProductInfoData(models.Model):
+    info_type = models.ForeignKey(ProductInfoType, on_delete=models.CASCADE)
+    key = models.CharField(max_length=100)
+    value = models.CharField(max_length=100)
 
 class Brand(BaseModel):  
     name = models.CharField(max_length=50)
