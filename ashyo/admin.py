@@ -13,5 +13,3 @@ admin.site.register(AboutAshyo)
 admin.site.register(Comment)
 admin.site.register(ProductInCart)
 admin.site.register(Order)
-
-admin.site.register(Product)
