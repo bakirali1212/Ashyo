@@ -17,5 +17,6 @@ urlpatterns = [
     path('product-detail/<int:pk>/', ProductDetailView.as_view()),
     path('add-to-cart/', AddToCart.as_view()),
     path('place-order/', PlaceOrder.as_view()),
+    
 ]
 
