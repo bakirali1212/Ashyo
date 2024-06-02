@@ -1,13 +1,9 @@
 from rest_framework import serializers
-from .models import Client, Category, Product, Brand, ProductMemory, ProductImages, AboutAshyo, Comment, ProductInCart, Order
+from .models import  Category, Product, Brand,  AboutAshyo, Comment
 import django_filters
 
 
-     # All List serializers!!!
-class ClientListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Client
-        fields = "__all__"
+
 
 class CategoryListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,21 +18,10 @@ class ProductListSerializer(serializers.ModelSerializer):
 class BrandListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = "__all__"
+        fields = ('img',)
 
 
-
-class ProductMemoryListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductMemory
-        fields = "__all__"
-
-class ProductImagesListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductImages
-        fields = "__all__"
-
-class AboutAshyoListSerializer(serializers.ModelSerializer):
+class AboutAshyoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AboutAshyo
         fields = "__all__"
@@ -46,12 +31,5 @@ class CommentListSerializer(serializers.ModelSerializer):
         model = Comment
         fields = "__all__"
 
-class ProductInCartListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductInCart
-        fields = "__all__"
 
-class OrderListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Order
-        fields = "__all__"
+
