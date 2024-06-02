@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Client, Category, ProductInfoData,ProductInfoType, Product, Brand,  ProductImages, AboutAshyo, Comment, ProductInCart, Order
-
+from .models import Client, Category, ProductInfoData,ProductInfoType, Product, Brand,  ProductImages
+from .models import Banner, Address, Lokatsiya, AboutAshyo, Faq, Comment, ProductInCart, Order
 
 admin.site.register(Client)
 admin.site.register(Category)
@@ -12,4 +12,9 @@ admin.site.register(ProductImages)
 admin.site.register(AboutAshyo)
 admin.site.register(Comment)
 admin.site.register(ProductInCart)
+admin.site.register(Banner)
 admin.site.register(Order)
+admin.site.register(Lokatsiya)
+admin.site.register(Address)
+admin.site.register(Faq)
+

@@ -39,7 +39,7 @@ class Lokatsiya(BaseModel):
 
 class Category(BaseModel):
     name = models.CharField(max_length=100)
-    # image = models.ImageField(upload_to='category/')
+    image = models.ImageField(upload_to='category/', null=True)
     icon = models.CharField(max_length=255)
 
     def __str__(self):
@@ -76,9 +76,13 @@ class ProductInfoType(models.Model):
 
 
 class ProductInfoData(models.Model):
-    info_type = models.ForeignKey(ProductInfoType, on_delete=models.CASCADE)
+    info_type = models.ForeignKey(ProductInfoType, on_delete=models.CASCADE, related_name='productinfotype')
     key = models.CharField(max_length=100)
     value = models.CharField(max_length=100)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='features')  # Yeni ekleme
+
+    def __str__(self):
+        return f"{self.key}: {self.value}"
 
 class Brand(BaseModel):  
     name = models.CharField(max_length=50)
@@ -125,8 +129,7 @@ class Comment(BaseModel):
 
 class ProductInCart(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')
-    quantity = models.PositiveIntegerField()
-    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='cart_item')  
+    quantity = models.PositiveIntegerField() 
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
