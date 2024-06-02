@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView
 from rest_framework import generics
-from .serializers import  CategoryListSerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
+from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-class CategoryListAPIView(ListAPIView):
-    serializer_class = CategoryListSerializer
+class CategorylistAPIView(ListAPIView):
+    serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
 class ProductListAPIView(ListAPIView):

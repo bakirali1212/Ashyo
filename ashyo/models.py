@@ -39,7 +39,7 @@ class Lokatsiya(BaseModel):
 
 class Category(BaseModel):
     name = models.CharField(max_length=100)
-    # image = models.ImageField(upload_to='category/')
+    img = models.ImageField(upload_to='media/', null=True)
     icon = models.CharField(max_length=255)
 
     def __str__(self):
@@ -59,9 +59,10 @@ class Banner(BaseModel):
 class Product(BaseModel):
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)  
+    model = models.CharField(max_length=50,null=True)
     img = models.ImageField(upload_to="images/")
     description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='category')
     ram = models.CharField(max_length=20, null =True)
     rom = models.CharField(max_length=20, null =True)
     batary = models.CharField(max_length=30, null =True)

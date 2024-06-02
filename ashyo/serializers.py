@@ -4,11 +4,20 @@ import django_filters
 
 
 
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'model']
 
-class CategoryListSerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
+    product = serializers.ListSerializer(child=ProductSerializer(), source='category')
+
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ['id', 'name', 'product']
+
+
+
 
 class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
