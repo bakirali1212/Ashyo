@@ -71,19 +71,27 @@ class ProductinfoDataserializer(serializers.ModelSerializer):
         fields = ['key', 'value']
 
 class ProductSerializer(serializers.ModelSerializer):
-    images = ProductImagesSerializer(many=True, read_only=True)
-    features = ProductinfoDataserializer(many=True, read_only=True)
-    price_discounted = serializers.SerializerMethodField()
+    images = ProductImagesSerializer(many=True)
+    features = ProductinfoDataserializer(many=True)
+    monthly_payment = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'img', 'images', 'price', 'price_discounted', 'ram', 'rom', 'batary', 'delivery', 'features']
+        fields = ['id', 'name', 'img', 'images', 'price', 'monthly_payment', 'ram', 'rom', 'batary', 'delivery', 'features']
+        ref_name = "ProductSerializer"
 
-    def get_price_discounted(self, obj):
-        if obj.price > Decimal('100'):
-            return obj.price * Decimal('0.05')  
-        else:
-            return obj.price
+    def get_monthly_payment(self, obj):
+        new_price = Decimal(obj.price) / 6 + Decimal(obj.price) * Decimal('0.018')
+        return new_price
+
+class ProductComparisonSerializer(serializers.ModelSerializer):
+    features = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        exclude = ('created_at', 'updated_at',)
+
+
 
 
 class ProductInCartSerializer(serializers.ModelSerializer):

@@ -3,7 +3,7 @@ from rest_framework import generics
 from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment
 from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer
-from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer
+from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer,ProductComparisonSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
@@ -65,3 +65,10 @@ class PlaceOrder(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ProductComparisonListAPIView(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductComparisonSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
