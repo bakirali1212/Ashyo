@@ -10,31 +10,34 @@ class BaseModel(models.Model):
 
 
 class Client(BaseModel):
-    class ClientPayChoices(models.TextChoices):
-        NAQD = "naqd", "Naqd"
-        KREDIT = "kredit", "Kredit"
-
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=50)
     email = models.EmailField()
-    pay = models.CharField(max_length=55, choices=ClientPayChoices.choices, default=ClientPayChoices.NAQD)
-    passport_img = models.ImageField(upload_to="passport/")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+class PymentType(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='media/')
+
+class Kredit(BaseModel):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='media/')
+
+
 class Address(BaseModel):
-    region = models.CharField(max_length=200)
-    district = models.CharField(max_length=200)
-    address = models.CharField(max_length=255)
-    def __str__(self):
-        return self.region
+    longitude = models.FloatField()
+    latitude = models.FloatField()
 
-class Lokatsiya(BaseModel):
-    title = models.CharField(max_length=200)
-    district = models.CharField(max_length=200)
+class salom(BaseModel):
+    name = models.CharField(max_length=2)
 
+class FlialLocation(models.Model):
+    title = models.CharField(max_length=100)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
 
 
 class Category(BaseModel):

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from decimal import Decimal
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Product, ProductImages, ProductInfoData
-from .models import ProductInCart,Order
+from .models import ProductInCart,Order, Address,FlialLocation
 import django_filters
 
 
@@ -77,8 +77,21 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'img', 'images', 'price', 'price_discounted', 'ram', 'rom', 'batary', 'delivery', 'features']
-
+        fields = (
+                'id',
+                'name',
+                'img', 
+                'images',
+                'price',
+                'price_discounted',
+                'ram',
+                'rom',
+                'batary',
+                'delivery',
+                'features',
+                )
+        
+        ref_name = "ProductSerializer"
     def get_price_discounted(self, obj):
         if obj.price > Decimal('100'):
             return obj.price * Decimal('0.05')  
@@ -90,6 +103,17 @@ class ProductInCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductInCart
         fields = "__all__"
+
+class SendAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = '__all__'
+        
+
+class FlialLocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FlialLocation
+        fields = '__all__'
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:

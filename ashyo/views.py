@@ -3,8 +3,8 @@ from rest_framework import generics
 from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment
 from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer
-from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer
-from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq
+from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer,SendAddressSerializer, ProductInCartSerializer, OrderSerializer,FlialLocationSerializer
+from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Address
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -65,3 +65,11 @@ class PlaceOrder(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class FlialLocationListAPIView(ListAPIView):
+    serializer_class = FlialLocationSerializer
+    queryset = Address.objects.all()
+
+class SendAddressCreatAPIView(generics.CreateAPIView):
+    serializer_class = SendAddressSerializer
+    queryset = Address.objects.all()

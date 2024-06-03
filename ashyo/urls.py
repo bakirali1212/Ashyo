@@ -2,7 +2,7 @@ from django.urls import path
 from .views import  ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView
 from .views import RecommendationListAPIView, FaqListCreate, ProductDetailView, AddToCart, PlaceOrder
 from .views import BannerListAPIView
-from .views import CategorylistAPIView, ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView
+from .views import CategorylistAPIView,SendAddressCreatAPIView, ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView,FlialLocationListAPIView
 
 
 
@@ -20,7 +20,9 @@ urlpatterns = [
     path('add-to-cart/', AddToCart.as_view()),
     path('place-order/', PlaceOrder.as_view()),
     
-    path('product/', ProductListAPIView.as_view()),    
+    path('product/', ProductListAPIView.as_view()),
+    path('Flial-list/', FlialLocationListAPIView.as_view()), 
+    path('adress-send', SendAddressCreatAPIView.as_view()),   
 
       
 ]
