@@ -4,7 +4,7 @@ from .serializers import  CategorySerializer, ProductListSerializer, BrandListSe
 from .models import  Category, Product, Brand,  AboutAshyo, Comment
 from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer
 from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer,SendAddressSerializer, ProductInCartSerializer, OrderSerializer,FlialLocationSerializer
-from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Address
+from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Address,FlialLocation
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -68,7 +68,7 @@ class PlaceOrder(APIView):
     
 class FlialLocationListAPIView(ListAPIView):
     serializer_class = FlialLocationSerializer
-    queryset = Address.objects.all()
+    queryset = FlialLocation.objects.all()
 
 class SendAddressCreatAPIView(generics.CreateAPIView):
     serializer_class = SendAddressSerializer

@@ -31,8 +31,7 @@ class Address(BaseModel):
     longitude = models.FloatField()
     latitude = models.FloatField()
 
-class salom(BaseModel):
-    name = models.CharField(max_length=2)
+
 
 class FlialLocation(models.Model):
     title = models.CharField(max_length=100)
