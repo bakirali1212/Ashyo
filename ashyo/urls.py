@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import  ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView
-from .views import RecommendationListAPIView, FaqListCreate, ProductDetailView, AddToCart, PlaceOrder
+from .views import RecommendationListAPIView, FaqListCreate, ProductDetailView, AddToCart, PlaceOrder, MostpopularproductListAPIView
 from .views import BannerListAPIView
 from .views import CategorylistAPIView, ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView,ProductComparisonListAPIView
 
@@ -20,6 +20,7 @@ urlpatterns = [
     path('add-to-cart/', AddToCart.as_view()),
     path('place-order/', PlaceOrder.as_view()),
     path('compare-products/', ProductComparisonListAPIView.as_view()),
+    path('mostpopular-productslist/', MostpopularproductListAPIView.as_view()),
     
     path('product/', ProductListAPIView.as_view()),    
 

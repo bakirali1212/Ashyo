@@ -2,7 +2,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework import generics
 from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment
-from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer
+from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer, MostpopularproductSerializer
 from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer,ProductComparisonSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq
 from django_filters.rest_framework import DjangoFilterBackend
@@ -48,6 +48,10 @@ class FaqListCreate(generics.ListCreateAPIView):
 class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+class MostpopularproductListAPIView(ListAPIView):
+    serializer_class = MostpopularproductSerializer
+    queryset = Product.objects.all()
 
 class AddToCart(APIView):
     def post(self, request):
