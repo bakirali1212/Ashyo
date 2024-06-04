@@ -17,11 +17,10 @@ urlpatterns = [
     path('recommendation-list/', RecommendationListAPIView.as_view()),
     path('faqs/', FaqListCreate.as_view()),
     path('product-detail/<int:pk>/', ProductDetailView.as_view()),
-    path('add-to-cart/', AddToCart.as_view()),
+    path('add-to-cart/<int:pk>/', AddToCart.as_view()),
     path('place-order/', PlaceOrder.as_view()),
     path('compare-products/', ProductComparisonListAPIView.as_view()),
-    path('mostpopular-productslist/', MostpopularproductListAPIView.as_view()),
-    
+    path('mostpopular-productslist/', MostpopularproductListAPIView.as_view()),   
     path('product/', ProductListAPIView.as_view()),    
 
       

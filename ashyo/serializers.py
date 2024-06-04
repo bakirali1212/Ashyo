@@ -176,12 +176,13 @@ class MostpopularproductSerializer(serializers.ModelSerializer):
         return product_serializer.data.get('count_number_of_views')
 
 
-class ProductInCartSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductInCart
-        fields = "__all__"
-
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"
+
+class ProductInCartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductInCart
+        fields = ['product', 'quantity', 'total_price']
+
