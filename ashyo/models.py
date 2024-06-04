@@ -42,6 +42,9 @@ class Product(BaseModel):
     img = models.ImageField(upload_to="images")
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
+    ram = models.CharField(max_length=50, null=True)
+    rom = models.CharField(max_length=50, null=True)
+    batary = models.CharField(max_length=50, null= True)
 
     def __str__(self):
         return self.name

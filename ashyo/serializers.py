@@ -24,6 +24,30 @@ class BrandListSerializer(serializers.ModelSerializer):
         model = Brand
         fields = "__all__"
 
+class BrandFilterSeruializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        field = (
+            "name",
+        )
+
+
+class ProductListserializerFilter(serializers.ModelSerializer):
+    brand = BrandFilterSeruializer()
+    class Meta:
+        model = Product
+        fields = (
+            'name',
+            'price',
+            'image',
+            'ram',
+            'rom',
+            'batary',
+            'brand',
+
+        )
+
+
 
 
 class ProductMemoryListSerializer(serializers.ModelSerializer):
