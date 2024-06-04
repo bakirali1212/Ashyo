@@ -1,10 +1,12 @@
 from rest_framework.generics import ListAPIView
 from rest_framework import generics
+from .serializers import  ProductListSerializer, BrandListSerializer, ProductListserializerFilter
+from .models import Client, Category, Product, Brand,  AboutAshyo, Comment
 from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer, ClientdataSerializers
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Client
 from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer
 from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer,FlialLocationSerializer
-from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Address,FlialLocation
+from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq,FlialLocation
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 from rest_framework.views import APIView
@@ -35,6 +37,49 @@ class AboutAshyoAPIView(APIView):
 class BrandListAPIView(ListAPIView):
     serializer_class = BrandListSerializer
     queryset = Brand.objects.all()
+
+
+
+class ProductListFIlterPrice(ListAPIView):
+    serializer_class = ProductListserializerFilter
+    queryset = Product.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = (
+        'price',
+    )
+
+class ProductListFIlterBrand(ListAPIView):
+    serializer_class = ProductListserializerFilter
+    queryset = Product.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = (
+        'brand__name',
+    )
+
+class ProductListFIlterRAM(ListAPIView):
+    serializer_class = ProductListserializerFilter
+    queryset = Product.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = (
+        'ram',
+    )
+
+class ProductListFIlterROM(ListAPIView):
+    serializer_class = ProductListserializerFilter
+    queryset = Product.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = (
+        'rom',
+    )
+
+class ProductListFIlterBATARY(ListAPIView):
+    serializer_class = ProductListserializerFilter
+    queryset = Product.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = (
+        'batary',
+    )
+
     
 class CommentListAPIView(ListAPIView):
     serializer_class = CommentListSerializer

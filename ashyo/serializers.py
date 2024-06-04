@@ -37,6 +37,30 @@ class BrandListSerializer(serializers.ModelSerializer):
         model = Brand
         fields = ('img',)
 
+class BrandFilterSeruializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        field = (
+            "name",
+        )
+
+
+class ProductListserializerFilter(serializers.ModelSerializer):
+    brand = BrandFilterSeruializer()
+    class Meta:
+        model = Product
+        fields = (
+            'name',
+            'price',
+            'image',
+            'ram',
+            'rom',
+            'batary',
+            'brand',
+
+        )
+
+
 
 class AboutAshyoSerializer(serializers.ModelSerializer):
     class Meta:
