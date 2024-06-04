@@ -1,11 +1,12 @@
 from rest_framework.generics import ListAPIView
 from rest_framework import generics
-from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
-from .models import  Category, Product, Brand,  AboutAshyo, Comment
+from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer, ClientdataSerializers
+from .models import  Category, Product, Brand,  AboutAshyo, Comment, Client
 from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer
-from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer,SendAddressSerializer, ProductInCartSerializer, OrderSerializer,FlialLocationSerializer
+from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer,FlialLocationSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Address,FlialLocation
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -15,9 +16,15 @@ class CategorylistAPIView(ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
+
+
+
 class ProductListAPIView(ListAPIView):
     serializer_class = ProductListSerializer
     queryset = Product.objects.all()
+    filter_backends =  [DjangoFilterBackend,SearchFilter]
+    filterset_fields = ('category',)
+    search_fields = ('name',)
 
 class AboutAshyoAPIView(APIView):
     def get(self, request):
@@ -70,6 +77,6 @@ class FlialLocationListAPIView(ListAPIView):
     serializer_class = FlialLocationSerializer
     queryset = FlialLocation.objects.all()
 
-class SendAddressCreatAPIView(generics.CreateAPIView):
-    serializer_class = SendAddressSerializer
-    queryset = Address.objects.all()
+class ClientdataCreatAPIView(generics.CreateAPIView):
+    serializer_class = ClientdataSerializers
+    queryset = Client.objects.all()

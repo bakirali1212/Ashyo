@@ -3,13 +3,13 @@ from .models import (Client, Category, ProductInfoData,
                      ProductInfoType, Product, Brand,  
                      ProductImages, Banner, Address, FlialLocation, 
                      AboutAshyo, Faq, Comment, ProductInCart, 
-                     Order,Kredit,
+                     Order,CreditImage,
                      PymentType)
 
 
 admin.site.register(Client)
 admin.site.register(PymentType)
-admin.site.register(Kredit)
+admin.site.register(CreditImage)
 
 admin.site.register(Category)
 admin.site.register(ProductInfoData)

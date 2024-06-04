@@ -1,22 +1,28 @@
 from rest_framework import serializers
 from decimal import Decimal
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Product, ProductImages, ProductInfoData
-from .models import ProductInCart,Order, Address,FlialLocation
-import django_filters
+from .models import ProductInCart,Order, Address,FlialLocation,Client
 
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'model']
+        fields = (
+                'id', 
+                'model',
+                )
 
 class CategorySerializer(serializers.ModelSerializer):
     product = serializers.ListSerializer(child=ProductSerializer(), source='category')
 
     class Meta:
         model = Category
-        fields = ['id', 'name', 'product']
+        fields = (
+                'id', 
+                'name', 
+                'product',
+                )
 
 
 
@@ -104,10 +110,7 @@ class ProductInCartSerializer(serializers.ModelSerializer):
         model = ProductInCart
         fields = "__all__"
 
-class SendAddressSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Address
-        fields = '__all__'
+
         
 
 class FlialLocationSerializer(serializers.ModelSerializer):
@@ -119,3 +122,8 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"
+
+class ClientdataSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        exclude = ("email",)

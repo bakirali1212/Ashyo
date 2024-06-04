@@ -19,17 +19,18 @@ class Client(BaseModel):
         return f"{self.first_name} {self.last_name}"
 
 class PymentType(models.Model):
-    name = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='media/')
-
-class Kredit(BaseModel):
-    title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='media/')
+    cart = models.CharField(max_length=50)
+    cash = models.CharField(max_length=50)
+    credit = models.CharField(max_length=50)
 
 
-class Address(BaseModel):
-    longitude = models.FloatField()
-    latitude = models.FloatField()
+class CreditImage(BaseModel):
+
+    image_1 = models.ImageField(upload_to='media/')
+    image_2 = models.ImageField(upload_to='media/')
+
+
+
 
 
 
@@ -95,7 +96,9 @@ class Brand(BaseModel):
     def __str__(self):
         return self.name
 
-
+class Address(BaseModel):
+    longitude = models.FloatField()
+    latitude = models.FloatField()
 
 
 
