@@ -96,4 +96,3 @@ class ProductComparisonListAPIView(APIView):
         products = Product.objects.all()
         serializer = ProductComparisonSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
