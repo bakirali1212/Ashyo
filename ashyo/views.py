@@ -52,9 +52,9 @@ class ProductListFIlterBrand(ListAPIView):
     serializer_class = ProductListserializerFilter
     queryset = Product.objects.all()
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = (
-        'brand__name',
-    )
+    # filterset_fields = (
+    #     'brand__name',
+    # )
 
 class ProductListFIlterRAM(ListAPIView):
     serializer_class = ProductListserializerFilter

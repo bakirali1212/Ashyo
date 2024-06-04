@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from decimal import Decimal
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Product, ProductImages, ProductInfoData
-from .models import ProductInCart,Order, Address,FlialLocation,Client
+from .models import ProductInCart,Order,FlialLocation,Client
 
 
 
@@ -37,22 +37,19 @@ class BrandListSerializer(serializers.ModelSerializer):
         model = Brand
         fields = ('img',)
 
-class BrandFilterSeruializer(serializers.ModelSerializer):
+class BrandFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        field = (
-            "name",
-        )
-
+        fields  = '__all__'
 
 class ProductListserializerFilter(serializers.ModelSerializer):
-    brand = BrandFilterSeruializer()
+    brand = BrandFilterSerializer()
     class Meta:
         model = Product
         fields = (
             'name',
             'price',
-            'image',
+            'img',
             'ram',
             'rom',
             'batary',
@@ -110,8 +107,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = (
                 'id',
                 'name',
-                'img', 
-                'images',
+                'img',
                 'price',
                 'price_discounted',
                 'ram',
