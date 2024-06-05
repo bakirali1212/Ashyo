@@ -90,12 +90,12 @@ class FaqSerializer(serializers.ModelSerializer):
 class ProductImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImages
-        fields = ['image_1', 'image_2', 'image_3']
+        fields = ('image_1', 'image_2', 'image_3')
 
 class ProductinfoDataserializer(serializers.ModelSerializer):
     class Meta:
         model = ProductInfoData
-        fields = ['key', 'value']
+        fields = ('key', 'value')
 
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImagesSerializer(many=True, read_only=True)
@@ -106,6 +106,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = (
                 'id',
+                'images',
                 'name',
                 'img',
                 'price',
