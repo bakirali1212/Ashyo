@@ -70,6 +70,7 @@ class Product(BaseModel):
     rom = models.CharField(max_length=20, null =True)
     batary = models.CharField(max_length=30, null =True)
     delivery = models.DecimalField(max_digits=10, decimal_places=2,null=True)
+    price_discounted = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Bu yerda yangi maydon qo'shildi
 
     def __str__(self):
         return self.name
