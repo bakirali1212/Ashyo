@@ -133,3 +133,7 @@ class FlialLocationListAPIView(ListAPIView):
 class ClientdataCreatAPIView(generics.CreateAPIView):
     serializer_class = serializers.ClientdataSerializers
     queryset = Client.objects.all()
+
+class FlialLocationCreatAPIView(generics.CreateAPIView):
+    serializer_class = serializers.FlialLocationCreateSerializer
+    queryset = FlialLocation.objects.all()

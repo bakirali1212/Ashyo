@@ -297,9 +297,13 @@ class ClientdataSerializers(serializers.ModelSerializer):
         return instance
 
     
+ 
+class FlialLocationCreateSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = FlialLocation
         fields = (
-        'product', 
-        'quantity', 
-        'total_price'
+        "title",
+        "longitude",
+        "latitude",
         )
-
+    
