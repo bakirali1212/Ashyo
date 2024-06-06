@@ -12,13 +12,17 @@ from rest_framework.filters import SearchFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from . import serializers
+from . import models
 
 
 class CategorylistAPIView(ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
-
+class SendAplicationCreateAPIView(generics.CreateAPIView):
+    serializer_class = serializers.SendAplicationSerializer
+    queryset = models.Client.objects.all()
 
 
 class ProductListAPIView(ListAPIView):

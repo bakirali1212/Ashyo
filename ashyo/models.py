@@ -12,8 +12,10 @@ class BaseModel(models.Model):
 class Client(BaseModel):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=50)
-    email = models.EmailField()
+    phone = models.CharField(max_length=50, null=True)
+    email = models.EmailField(null=True)
+    text = models.TextField(null=True)
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

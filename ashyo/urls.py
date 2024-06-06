@@ -25,6 +25,7 @@ urlpatterns = [
     path('product-detail/<int:pk>/', ProductDetailView.as_view()),
     path('add-to-cart/', AddToCart.as_view()),
     path('place-order/', PlaceOrder.as_view()),
+    path('send-aplicationns/', views.SendAplicationCreateAPIView.as_view()),
     
     path('product/', ProductListAPIView.as_view()),
     path('Flial-list/', FlialLocationListAPIView.as_view()), 

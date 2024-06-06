@@ -24,7 +24,17 @@ class CategorySerializer(serializers.ModelSerializer):
                 'product',
                 )
 
+class SendAplicationSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Client
+        fields = (
+            "first_name",
+            "last_name",
+            'phone',
+            'email',
+            'text',
+        )
 
 
 class ProductListSerializer(serializers.ModelSerializer):
@@ -98,7 +108,6 @@ class ProductinfoDataserializer(serializers.ModelSerializer):
         fields = ['key', 'value']
 
 class ProductSerializer(serializers.ModelSerializer):
-    images = ProductImagesSerializer(many=True, read_only=True)
     features = ProductinfoDataserializer(many=True, read_only=True)
     price_discounted = serializers.SerializerMethodField()
 
