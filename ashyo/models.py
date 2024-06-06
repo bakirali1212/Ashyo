@@ -11,8 +11,7 @@ class BaseModel(models.Model):
 
 
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+ 
 
 class PymentType(models.Model):
     cart = models.CharField(max_length=50)
