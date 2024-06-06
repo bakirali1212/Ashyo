@@ -2,7 +2,6 @@ from rest_framework import serializers
 from decimal import Decimal
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Product, ProductImages, ProductInfoData
 from .models import ProductInCart,Order,Comment
-import django_filters
 
 
 
@@ -187,5 +186,9 @@ class OrderSerializer(serializers.ModelSerializer):
 class ProductInCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductInCart
-        fields = ['product', 'quantity', 'total_price']
+        fields = (
+        'product', 
+        'quantity', 
+        'total_price'
+        )
 
