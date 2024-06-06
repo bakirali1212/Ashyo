@@ -149,13 +149,16 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ProductComparisonSerializer(serializers.ModelSerializer):
     features = ProductinfoDataserializer(many=True)
-
+    category = serializers.SerializerMethodField()
     class Meta:
         model = Product
         exclude = (
         'created_at', 
         'updated_at',
         )
+    def get_category(self, obj):
+        return obj.category.name
+
 
 class MostpopularproductSerializer(serializers.ModelSerializer):
     count_number_of_views = serializers.SerializerMethodField()
