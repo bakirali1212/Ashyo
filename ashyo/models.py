@@ -9,14 +9,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Client(BaseModel):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=50)
-    email = models.EmailField()
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
 
 class PymentType(models.Model):
     cart = models.CharField(max_length=50)
@@ -28,10 +20,6 @@ class CreditImage(BaseModel):
 
     image_1 = models.ImageField(upload_to='media/')
     image_2 = models.ImageField(upload_to='media/')
-
-
-
-
 
 
 class FlialLocation(models.Model):
@@ -57,6 +45,9 @@ class Banner(BaseModel):
     def __str__(self):
         return self.title
 
+class Address(BaseModel):
+    longitude = models.FloatField()
+    latitude = models.FloatField()
 
 
 class Product(BaseModel):
@@ -74,6 +65,19 @@ class Product(BaseModel):
 
     def __str__(self):
         return self.name
+    
+
+class Client(BaseModel):
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
+    phone = models.CharField(max_length=50, null=True)
+    email = models.EmailField(null=True)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="product", null=True)
+    address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name="address", null=True)
+    product_count = models.PositiveIntegerField(default=0, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class ProductInfoType(models.Model):
     name = models.CharField(max_length=100)
@@ -97,14 +101,10 @@ class Brand(BaseModel):
     def __str__(self):
         return self.name
 
-class Address(BaseModel):
-    longitude = models.FloatField()
-    latitude = models.FloatField()
-
 
 
 class ProductImages(BaseModel):
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='images')
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='images', null=True)
     image_1 = models.ImageField(upload_to='products/')
     image_2 = models.ImageField(upload_to='products/')
     image_3 = models.ImageField(upload_to='products/')

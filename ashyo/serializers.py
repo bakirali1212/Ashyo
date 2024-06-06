@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from decimal import Decimal
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Product, ProductImages, ProductInfoData
-from .models import ProductInCart,Order,Comment
-import django_filters
+from .models import ProductInCart,Order,Comment, Address
 from .models import ProductInCart,Order,FlialLocation,Client
 
 
@@ -45,10 +44,15 @@ class BrandListSerializer(serializers.ModelSerializer):
 class BrandFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields  = '__all__'
+        fields  = (
+            "id",
+            'name',
+            "img",
+            "product",
+            )
 
 class ProductListserializerFilter(serializers.ModelSerializer):
-    brand = BrandFilterSerializer()
+    Brand = BrandFilterSerializer(many =True)
     class Meta:
         model = Product
         fields = (
@@ -58,7 +62,7 @@ class ProductListserializerFilter(serializers.ModelSerializer):
             'ram',
             'rom',
             'batary',
-            'brand',
+            'Brand',
 
         )
 
@@ -67,7 +71,10 @@ class ProductListserializerFilter(serializers.ModelSerializer):
 class AboutAshyoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AboutAshyo
-        fields = "__all__"
+        exclude = (
+        "created_at",
+        "updated_at"
+        )
 
 class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -132,7 +139,6 @@ class Cammentserializer(serializers.ModelSerializer):
       
 
 class ProductSerializer(serializers.ModelSerializer):
-    images = ProductImagesSerializer(many=True)
     features = ProductinfoDataserializer(many=True)
     monthly_payment = serializers.SerializerMethodField()
     comments = Cammentserializer(many=True)
@@ -144,7 +150,6 @@ class ProductSerializer(serializers.ModelSerializer):
             'id',
             'name', 
             'img', 
-            'images', 
             'price', 
             'monthly_payment', 
             'ram', 
@@ -172,45 +177,11 @@ class ProductSerializer(serializers.ModelSerializer):
             return request.session[view_key]
         return 0
 
-class ProductComparisonSerializer(serializers.ModelSerializer):
-    features = ProductinfoDataserializer(many=True)
 
-    class Meta:
-        model = Product
-        exclude = (
-        'created_at', 
-        'updated_at',
-        )
 
 class MostpopularproductSerializer(serializers.ModelSerializer):
     count_number_of_views = serializers.SerializerMethodField()
-    class Meta:
-        model = Product
-        fields = (
-                'id',
-                'count_number_of_views',
-                'images',
-                'name',
-                'img',
-                'price',
-                'price_discounted',
-                'ram',
-                'rom',
-                'batary',
-                'delivery',
-                'features',
-                )
-        
-        ref_name = "ProductSerializer"
-        
-    def get_price_discounted(self, obj):
-        if obj.price > Decimal('100'):
-            return obj.price * Decimal('0.05')  
-        else:
-            return obj.price
 
-
-class ProductInCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
@@ -225,6 +196,24 @@ class ProductInCartSerializer(serializers.ModelSerializer):
     def get_count_number_of_views(self, obj):
         product_serializer = ProductSerializer(obj, context=self.context)
         return product_serializer.data.get('count_number_of_views')
+        
+    
+
+
+
+class ProductInCartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = (
+        'id', 
+        'name', 
+        'img', 
+        'price',
+        'count_number_of_views'
+        )
+        ordering = ['-count_number_of_views']
+
+
 
 
 
@@ -245,8 +234,44 @@ class ProductInCartSerializer(serializers.ModelSerializer):
         model = ProductInCart
         fields = ['product', 'quantity', 'total_price']
 
+class Addressserializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = (
+        "longitude",
+        "latitude",
+        )
+
+class Productclientdataserializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = (
+        "id",
+        "name"
+        )
 
 class ClientdataSerializers(serializers.ModelSerializer):
+    lat = serializers.FloatField(required=True, write_only=True)
+    lon = serializers.FloatField(required=True, write_only=True)
+   
     class Meta:
         model = Client
-        exclude = ("email",)
+        fields = (
+        "first_name",
+        "last_name",
+        "phone",
+        "product_count",
+        'lat',
+        'lon',
+        )
+    
+
+    def create(self, validate_data):
+        lat = validate_data.pop('lat', 0)
+        lon = validate_data.pop('lon', 0)
+        address = Address.objects.create(longitude=lon, latitude=lat)
+        validate_data['address'] = address
+        instance = super().create(validate_data)
+        return instance
+
+    

@@ -3,13 +3,13 @@ from rest_framework import generics
 from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment
 from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer, MostpopularproductSerializer
-from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer,ProductComparisonSerializer
+from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, ProductInCart
 from collections import defaultdict
 from .serializers import  ProductListSerializer, BrandListSerializer, ProductListserializerFilter
 from .models import Client, Category, Product, Brand,  AboutAshyo, Comment
-from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer, ClientdataSerializers
-from .models import  Category, Product, Brand,  AboutAshyo, Comment, Client
+from .serializers import  CategorySerializer, ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer
+from .models import  Category, Product, Brand,  AboutAshyo, Comment
 from .serializers import   ProductListSerializer, BrandListSerializer, AboutAshyoSerializer, CommentListSerializer,BannerListSerializer
 from .serializers import RecommendationListSerializer, FaqSerializer, ProductSerializer, ProductInCartSerializer, OrderSerializer,FlialLocationSerializer
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq,FlialLocation
@@ -18,6 +18,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from . import serializers
 
 
 class CategorylistAPIView(ListAPIView):
@@ -46,45 +47,20 @@ class BrandListAPIView(ListAPIView):
 
 
 
-class ProductListFIlterPrice(ListAPIView):
+class ProductListFIlter(ListAPIView):
     serializer_class = ProductListserializerFilter
     queryset = Product.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = (
         'price',
+        # "Brand",
+        "ram",
+        "rom",
+        "batary",
     )
 
-class ProductListFIlterBrand(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    # filterset_fields = (
-    #     'brand__name',
-    # )
 
-class ProductListFIlterRAM(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = (
-        'ram',
-    )
 
-class ProductListFIlterROM(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = (
-        'rom',
-    )
-
-class ProductListFIlterBATARY(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = (
-        'batary',
-    )
 
     
 class CommentListAPIView(ListAPIView):
@@ -149,22 +125,11 @@ class PlaceOrder(APIView):
         cart_data.append({'total_price': total_price})
         return Response(cart_data, status=status.HTTP_200_OK)
 
-class ProductComparisonListAPIView(APIView):
-    def get(self, request):
-        products = Product.objects.all()
-        serializer = ProductComparisonSerializer(products, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    def post(self, request):
-        serializer = OrderSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class FlialLocationListAPIView(ListAPIView):
     serializer_class = FlialLocationSerializer
     queryset = FlialLocation.objects.all()
 
 class ClientdataCreatAPIView(generics.CreateAPIView):
-    serializer_class = ClientdataSerializers
+    serializer_class = serializers.ClientdataSerializers
     queryset = Client.objects.all()
