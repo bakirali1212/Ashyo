@@ -50,7 +50,7 @@ class BrandListSerializer(serializers.ModelSerializer):
 class BrandFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields  = '__all__'
+        fields  = ('name',)
 
 class ProductListserializerFilter(serializers.ModelSerializer):
     brand = BrandFilterSerializer()

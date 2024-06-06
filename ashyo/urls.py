@@ -10,11 +10,7 @@ from .views import CategorylistAPIView, ProductListAPIView, AboutAshyoAPIView, B
 
 
 urlpatterns = [
-    path('price-filter/', views.ProductListFIlterPrice.as_view() ),
-    path('brand-filter/', views.ProductListFIlterBrand.as_view()),
-    path('ram-filter/', views.ProductListFIlterRAM.as_view() ),
-    path('rom-filter/', views.ProductListFIlterROM.as_view()),
-    path('batary-filter/', views.ProductListFIlterBATARY.as_view()),
+    path('product-filter/', views.ProductListFIlter.as_view() ),
     path('category/', CategorylistAPIView.as_view()),    
     path('about-ashyo/', AboutAshyoAPIView.as_view()),
     path('brand-list/', BrandListAPIView.as_view()),

@@ -44,46 +44,17 @@ class BrandListAPIView(ListAPIView):
 
 
 
-class ProductListFIlterPrice(ListAPIView):
+class ProductListFIlter(ListAPIView):
     serializer_class = ProductListserializerFilter
     queryset = Product.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = (
         'price',
-    )
-
-class ProductListFIlterBrand(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    # filterset_fields = (
-    #     'brand__name',
-    # )
-
-class ProductListFIlterRAM(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = (
+        'brand__name',
         'ram',
-    )
-
-class ProductListFIlterROM(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = (
         'rom',
-    )
-
-class ProductListFIlterBATARY(ListAPIView):
-    serializer_class = ProductListserializerFilter
-    queryset = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = (
         'batary',
     )
-
     
 class CommentListAPIView(ListAPIView):
     serializer_class = CommentListSerializer
