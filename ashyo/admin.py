@@ -4,7 +4,7 @@ from .models import (Client, Category, ProductInfoData,
                      ProductImages, Banner, Address, FlialLocation, 
                      AboutAshyo, Faq, Comment, ProductInCart, 
                      Order,CreditImage,
-                     PymentType)
+                     PymentType, )
 
 
 admin.site.register(Client)

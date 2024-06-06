@@ -22,6 +22,10 @@ from . import models
 from . import serializers
 
 
+class CreditImageCreateAPIView(generics.CreateAPIView):
+    serializer_class = serializers.CreditImageSerializer
+    queryset = models.CreditImage.objects.all()
+
 class CategorylistAPIView(ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()

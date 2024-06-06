@@ -3,7 +3,7 @@ from decimal import Decimal
 from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq, Product, ProductImages, ProductInfoData
 from .models import ProductInCart,Order,Comment, Address
 from .models import ProductInCart,Order,FlialLocation,Client
-from .models import ProductInCart,Order,Comment
+from .models import ProductInCart,Order,Comment, CreditImage
 
 
 
@@ -272,10 +272,19 @@ class Productclientdataserializer(serializers.ModelSerializer):
         "name"
         )
 
+
+class CreditImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CreditImage
+        fields = (
+            "image_1",
+            "image_2",
+        )
+
 class ClientdataSerializers(serializers.ModelSerializer):
     lat = serializers.FloatField(required=True, write_only=True)
     lon = serializers.FloatField(required=True, write_only=True)
-   
+
     class Meta:
         model = Client
         fields = (
@@ -295,11 +304,3 @@ class ClientdataSerializers(serializers.ModelSerializer):
         validate_data['address'] = address
         instance = super().create(validate_data)
         return instance
-
-    
-        fields = (
-        'product', 
-        'quantity', 
-        'total_price'
-        )
-
