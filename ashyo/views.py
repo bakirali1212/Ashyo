@@ -18,6 +18,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from . import models
 from . import serializers
 
 
@@ -25,7 +26,9 @@ class CategorylistAPIView(ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
-
+class SendAplicationCreateAPIView(generics.CreateAPIView):
+    serializer_class = serializers.SendAplicationSerializer
+    queryset = models.Client.objects.all()
 
 
 class ProductListAPIView(ListAPIView):
@@ -53,14 +56,11 @@ class ProductListFIlter(ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = (
         'price',
-        # "Brand",
-        "ram",
-        "rom",
-        "batary",
+        'brand__name',
+        'ram',
+        'rom',
+        'batary',
     )
-
-
-
 
     
 class CommentListAPIView(ListAPIView):

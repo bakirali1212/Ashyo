@@ -10,6 +10,10 @@ class BaseModel(models.Model):
 
 
 
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 class PymentType(models.Model):
     cart = models.CharField(max_length=50)
     cash = models.CharField(max_length=50)
@@ -48,12 +52,18 @@ class Banner(BaseModel):
 class Address(BaseModel):
     longitude = models.FloatField()
     latitude = models.FloatField()
+class Brand(BaseModel):  
+    name = models.CharField(max_length=50)
+    img = models.ImageField(upload_to='brand')
 
+    def __str__(self):
+        return self.name
 
 class Product(BaseModel):
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)  
     model = models.CharField(max_length=50,null=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     img = models.ImageField(upload_to="images/")
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='category')
@@ -75,6 +85,8 @@ class Client(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="product", null=True)
     address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name="address", null=True)
     product_count = models.PositiveIntegerField(default=0, null=True)
+    text = models.TextField(null=True)
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -93,13 +105,7 @@ class ProductInfoData(models.Model):
     def __str__(self):
         return f"{self.key}: {self.value}"
 
-class Brand(BaseModel):  
-    name = models.CharField(max_length=50)
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='brands')
-    img = models.ImageField(upload_to='brand')
 
-    def __str__(self):
-        return self.name
 
 
 

@@ -27,7 +27,17 @@ class CategorySerializer(serializers.ModelSerializer):
         'product',
         )
 
+class SendAplicationSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Client
+        fields = (
+            "first_name",
+            "last_name",
+            'phone',
+            'email',
+            'text',
+        )
 
 
 class ProductListSerializer(serializers.ModelSerializer):
@@ -49,11 +59,10 @@ class BrandFilterSerializer(serializers.ModelSerializer):
             "id",
             'name',
             "img",
-            "product",
             )
 
 class ProductListserializerFilter(serializers.ModelSerializer):
-    Brand = BrandFilterSerializer(many =True)
+    brand = BrandFilterSerializer(many =True)
     class Meta:
         model = Product
         fields = (
@@ -63,7 +72,7 @@ class ProductListserializerFilter(serializers.ModelSerializer):
             'ram',
             'rom',
             'batary',
-            'Brand',
+            'brand',
 
         )
 

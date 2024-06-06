@@ -3,8 +3,7 @@ from . import views
 from .views import  ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView
 from .views import RecommendationListAPIView, FaqListCreate, ProductDetailView, AddToCart, PlaceOrder, MostpopularproductListAPIView
 from .views import BannerListAPIView
-from .views import CategorylistAPIView, ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView
-from .views import CategorylistAPIView, ProductListAPIView, AboutAshyoAPIView, BrandListAPIView, CommentListAPIView,FlialLocationListAPIView
+from .views import CategorylistAPIView,  FlialLocationListAPIView
 
 
 
@@ -24,8 +23,8 @@ urlpatterns = [
     path('place-order/', PlaceOrder.as_view()),
     path('mostpopular-productslist/', MostpopularproductListAPIView.as_view()),   
     path('product/', ProductListAPIView.as_view()),    
+    path('send-aplicationns/', views.SendAplicationCreateAPIView.as_view()),
     
-    path('product/', ProductListAPIView.as_view()),
     path('Flial-list/', FlialLocationListAPIView.as_view()), 
     path('client-date/', views.ClientdataCreatAPIView.as_view()),   
 
