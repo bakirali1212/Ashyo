@@ -137,3 +137,4 @@ class ClientdataCreatAPIView(generics.CreateAPIView):
 class FlialLocationCreatAPIView(generics.CreateAPIView):
     serializer_class = serializers.FlialLocationCreateSerializer
     queryset = FlialLocation.objects.all()
+    

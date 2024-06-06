@@ -297,7 +297,7 @@ class ClientdataSerializers(serializers.ModelSerializer):
         return instance
 
     
- 
+
 class FlialLocationCreateSerializer(serializers.ModelSerializer): 
     class Meta:
         model = FlialLocation
