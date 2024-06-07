@@ -5,6 +5,7 @@ from . import models
 admin.site.register(models.Client)
 admin.site.register(models.PymentType)
 admin.site.register(models.CreditImage)
+admin.site.register(models.User)
 
 admin.site.register(models.Category)
 admin.site.register(models.ProductInfoData)

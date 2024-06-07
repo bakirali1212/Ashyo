@@ -17,15 +17,12 @@ urlpatterns = [
     path('mostpopular-productslist/', views.MostpopularproductListAPIView.as_view()),   
     path('product/', views.ProductListAPIView.as_view()),    
     path('send-aplicationns/', views.SendAplicationCreateAPIView.as_view()),
-    path('Flial-list/', views.FlialLocationListAPIView.as_view()), 
-    path('client-date/', views.ClientdataCreatAPIView.as_view()),
-    path('area-list/', views.ArealistAPIView.as_view()),  
-    path('area-creat/', views.AreaCreatAPIView.as_view()),
-    path('brandimage-list/', views.BrandImageListAPIView.as_view()), 
-    path('ram-list/', views.RamListAPIView.as_view()),
-    path('rom-list/', views.RomListAPIView.as_view()),  
-    path('batary-list/', views.BataryListAPIView.as_view()), 
-    path('product-filter/', views.ProductListFIlter.as_view() ),
+    path('Cridet-send-image/', views.CreditImageCreateAPIView.as_view() ),\
+    path('user-register/', views.UserRegister.as_view() ),
+    path('verify/', views.VerifyAPIView.as_view()),
+    path('login/', views.UserLogin.as_view()),
+    path('client-date/', views.ClientdataCreatAPIView.as_view()),   
 
-      ]
+      
+]
 
