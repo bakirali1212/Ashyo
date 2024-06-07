@@ -129,7 +129,11 @@ class FaqSerializer(serializers.ModelSerializer):
         'id', 
         'question'
         )
-    
+
+class CreditImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.CreditImage
+        fields = "__all__"
 
 class ProductImagesSerializer(serializers.ModelSerializer):
     class Meta:
