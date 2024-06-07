@@ -9,11 +9,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
 class PymentType(models.Model):
     cart = models.CharField(max_length=50)
     cash = models.CharField(max_length=50)
@@ -36,6 +31,7 @@ class Category(BaseModel):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='category/', null=True)
     icon = models.CharField(max_length=255)
+    order = models.PositiveIntegerField(null=True)
 
     def __str__(self):
         return self.name
@@ -71,7 +67,8 @@ class Product(BaseModel):
     rom = models.CharField(max_length=20, null =True)
     batary = models.CharField(max_length=30, null =True)
     delivery = models.DecimalField(max_digits=10, decimal_places=2,null=True)
-    price_discounted = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Bu yerda yangi maydon qo'shildi
+    price_discounted = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    count_number_of_views = models.PositiveIntegerField(default=0, null=True, blank=True) 
 
     def __str__(self):
         return self.name
@@ -156,3 +153,11 @@ class Order(BaseModel):
 
     def __str__(self):
         return f"Order {self.id} by {self.client}"
+    
+class TermPayment(BaseModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='term_payment')
+    month = models.PositiveIntegerField()
+    percentage = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.id} {self.product}"
