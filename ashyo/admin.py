@@ -1,28 +1,24 @@
 from django.contrib import admin
-from .models import (Client, Category, ProductInfoData,
-                     ProductInfoType, Product, Brand,  
-                     ProductImages, Banner, Address, FlialLocation, 
-                     AboutAshyo, Faq, Comment, ProductInCart, 
-                     Order,CreditImage,
-                     PymentType)
+from . import models
 
 
-admin.site.register(Client)
-admin.site.register(PymentType)
-admin.site.register(CreditImage)
+admin.site.register(models.Client)
+admin.site.register(models.PymentType)
+admin.site.register(models.CreditImage)
 
-admin.site.register(Category)
-admin.site.register(ProductInfoData)
-admin.site.register(ProductInfoType)
-admin.site.register(Product)
-admin.site.register(Brand)
-admin.site.register(ProductImages)
-admin.site.register(AboutAshyo)
-admin.site.register(Comment)
-admin.site.register(ProductInCart)
-admin.site.register(Banner)
-admin.site.register(Order)
-admin.site.register(FlialLocation)
-admin.site.register(Address)
-admin.site.register(Faq)
+admin.site.register(models.Category)
+admin.site.register(models.ProductInfoData)
+admin.site.register(models.ProductInfoType)
+admin.site.register(models.Product)
+admin.site.register(models.Brand)
+admin.site.register(models.ProductImages)
+admin.site.register(models.AboutAshyo)
+admin.site.register(models.Comment)
+admin.site.register(models.ProductInCart)
+admin.site.register(models.Banner)
+admin.site.register(models.FlialLocation)
+admin.site.register(models.Faq)
+admin.site.register(models.Region)
+admin.site.register(models.Tuman)
+admin.site.register(models.ShippingAddress)
 

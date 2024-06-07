@@ -9,11 +9,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
 class PymentType(models.Model):
     cart = models.CharField(max_length=50)
     cash = models.CharField(max_length=50)
@@ -49,9 +44,7 @@ class Banner(BaseModel):
     def __str__(self):
         return self.title
 
-class Address(BaseModel):
-    longitude = models.FloatField()
-    latitude = models.FloatField()
+
 class Brand(BaseModel):  
     name = models.CharField(max_length=50)
     img = models.ImageField(upload_to='brand')
@@ -71,21 +64,49 @@ class Product(BaseModel):
     rom = models.CharField(max_length=20, null =True)
     batary = models.CharField(max_length=30, null =True)
     delivery = models.DecimalField(max_digits=10, decimal_places=2,null=True)
-    price_discounted = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Bu yerda yangi maydon qo'shildi
+    price_discounted = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True) 
 
     def __str__(self):
         return self.name
     
+class Region(BaseModel):
+    name = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.name
+
+class Tuman(BaseModel):
+    name = models.CharField(max_length=100, null=True)
+    region = models.ForeignKey(Region, on_delete=models.PROTECT, related_name='region1',null=True)
+
+    def __str__(self):
+        return self.name
+
+class ShippingAddress(BaseModel):
+    region = models.ForeignKey(Region, on_delete=models.PROTECT, related_name='region2',null=True)
+    tuman = models.ForeignKey(Tuman, on_delete=models.PROTECT, related_name='tuman', null=True)
+    address = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return self.address
+
+
 
 class Client(BaseModel):
+    class PymentChoice(models.TextChoices):
+        CART = "cart","Cart"
+        NAQD = "naqd","Naqd"
+        CREDIT = "credit","Credit"
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=50, null=True)
     email = models.EmailField(null=True)
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="product", null=True)
-    address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name="address", null=True)
+    shipping_address = models.ForeignKey(ShippingAddress, on_delete=models.PROTECT, related_name="shipping_adsress", null=True)
     product_count = models.PositiveIntegerField(default=0, null=True)
     text = models.TextField(null=True)
+    pyment = models.CharField(max_length=55, choices=PymentChoice.choices, default=PymentChoice.NAQD)
+    # pyment = models.ForeignKey(PymentType, on_delete=models.PROTECT, related_name="pyment", null=True)
 
 
     def __str__(self):
@@ -149,10 +170,4 @@ class ProductInCart(BaseModel):
         return f"{self.product.name} in cart"
 
 
-
-class Order(BaseModel):  
-    client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name='orders')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Order {self.id} by {self.client}"
+    
