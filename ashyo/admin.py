@@ -4,9 +4,9 @@ from .models import (Client, Category, ProductInfoData,
                      ProductImages, Banner, Address, FlialLocation, 
                      AboutAshyo, Faq, Comment, ProductInCart, 
                      Order,CreditImage,
-                     PymentType, )
+                     PymentType,User )
 
-
+admin.site.register(User)
 admin.site.register(Client)
 admin.site.register(PymentType)
 admin.site.register(CreditImage)

@@ -24,8 +24,11 @@ urlpatterns = [
     path('mostpopular-productslist/', MostpopularproductListAPIView.as_view()),   
     path('product/', ProductListAPIView.as_view()),    
     path('send-aplicationns/', views.SendAplicationCreateAPIView.as_view()),
-    path('Cridet-send-image/', views.CreditImageCreateAPIView.as_view() ),
-    
+    path('Cridet-send-image/', views.CreditImageCreateAPIView.as_view() ),\
+    path('user-register/', views.UserRegister.as_view() ),
+    path('verify/', views.VerifyAPIView.as_view()),
+    path('login/', views.UserLogin.as_view()),
+    path('Flial-create/', views.FlialLocationCreatAPIView.as_view()),
     path('Flial-list/', FlialLocationListAPIView.as_view()), 
     path('client-date/', views.ClientdataCreatAPIView.as_view()),   
 

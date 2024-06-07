@@ -4,7 +4,7 @@ from .models import  Category, Product, Brand,  AboutAshyo, Comment, Banner, Faq
 from .models import ProductInCart,Order,Comment, Address
 from .models import ProductInCart,Order,FlialLocation,Client
 from .models import ProductInCart,Order,Comment, CreditImage
-
+from . import models
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -304,3 +304,31 @@ class ClientdataSerializers(serializers.ModelSerializer):
         validate_data['address'] = address
         instance = super().create(validate_data)
         return instance
+
+
+class FlialLocationCreateSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = FlialLocation
+        fields = (
+        "title",
+        "longitude",
+        "latitude",
+        )
+
+class UserSerializer(serializers.Serializer):
+    phone = serializers.CharField()
+    password = serializers.CharField()
+
+class VerifySerializer(serializers.Serializer):
+    user = serializers.PrimaryKeyRelatedField(queryset= models.User.objects.filter(status="new"))
+    code = serializers.CharField()
+
+
+class LoginSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = models.User
+        fields = (
+            'phone',
+            'password',
+        )
